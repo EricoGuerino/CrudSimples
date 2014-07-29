@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>CRUD SIMPLES</title>
+</h:head>
+<h:body>
+	<h:form id="form1">
+		<p:messages globalOnly="true" escape="false" autoupdate="true" showDetail="true" showSummary="false"/>
+		
+		<p:dataTable 
+		id="table1"
+		value="#{usuarioMB.listarUsuarios}" 
+		var="usuario"
+		rowKey="#{usuario.id}"
+		emptyMessage="#{msg.emptyMessage}" 
+		style="width:750px;">
+			
+			<f:facet name="header">USUARIOS</f:facet>
+			
+			<p:column headerText="MATRICULA">
+				<h:outputText value="#{usuario.id}" />
+			</p:column>
+			
+			<p:column 
+			headerText="NOME"
+			sortBy="#{usuario.nome}"
+			filterBy="#{usuario.nome}">
+				<p:commandLink action="#{usuarioMB.alterarDados(usuario)}">
+					<h:outputText value="#{usuario.nome}" />
+				</p:commandLink>
+			</p:column>
+			
+			<p:column 
+			headerText="CPF"
+			sortBy="#{usuario.cpf}"
+			filterBy="#{usuario.cpf}">
+				<h:outputText value="#{usuario.cpf}" />
+			</p:column>
+			
+			<p:column 
+			headerText="EMAIL"
+			sortBy="#{usuario.email}"
+			filterBy="#{usuario.email}">
+				<h:outputText value="#{usuario.email}" />
+			</p:column>
+			
+			<p:column headerText="EXCLUIR USUARIO">
+				<p:commandButton id="excluir" accesskey="#{usuario.id}" value="DEL" action="#{usuarioMB.deletarUsuario(usuario)}"  ajax="true" update="table1">
+					<f:setPropertyActionListener target="#{usuarioMB.row_id}" value="#{usuario.id}" />
+				</p:commandButton>
+					
+			</p:column>
+			
+			<f:facet name="footer">
+				<p:outputLabel value="VIRTUAL SISTEMAS"/>
+				<br />
+				<p:commandButton immediate="true" value="Voltar Para Index" action="#{usuarioMB.cancelarParaIndex()}"/>
+			</f:facet>
+			
+			
+		</p:dataTable>
+		
+	</h:form>
+</h:body>
+</html>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>CRUD SIMPLES</title>
+</h:head>
+<h:body>
+	<h1>CADASTRO DE USUARIOS</h1>
+	
+	<h:form>
+		
+		<p:messages globalOnly="true" autoUpdate="true" escape="false" showDetail="true" showSummary="false"/>
+		<p:panelGrid columns="1">
+			<p:panelGrid columns="2">
+				<p:outputLabel for="nome"  value="Nome: " />
+				<p:inputText id="nome" value="#{usuarioMB.usuario.nome}"
+					required="true" requiredMessage="aaaa" />
+
+				<p:outputLabel for="cpf" value="CPF: " />
+				<p:inputMask id="cpf" mask="999.999.999-99"
+					value="#{usuarioMB.usuario.cpf}" required="true"
+					requiredMessage="aaaa" />
+
+				<p:outputLabel for="telefone" value="Telefone: " />
+				<p:inputMask id="telefone" mask="(99) 9999-9999"
+					value="#{usuarioMB.usuario.telefone}" required="true"
+					requiredMessage="aaaa" />
+
+				<p:outputLabel for="email" value="E-mail: " />
+				<p:inputText id="email" value="#{usuarioMB.usuario.email}"
+					required="true" requiredMessage="aaaa" />
+			</p:panelGrid>
+			<p:panelGrid columns="1">
+				<p:commandButton value="Enviar"
+					action="#{usuarioMB.salvarDadosUsuario()}" />
+				<p:commandButton value="Cancelar" immediate="true"
+					action="#{usuarioMB.cancelarParaIndex()}" />
+			</p:panelGrid>
+		</p:panelGrid>
+	</h:form>
+</h:body>
+</html>
